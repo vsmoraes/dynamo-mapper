@@ -1,13 +1,15 @@
 {
-    "name": "dafiti/dynamo-mapper",
+    "name": "vsmoraes/dynamo-mapper",
     "description": "Map data objects into dynamo queries",
     "authors": [
         {
             "name": "Vinicius Moraes",
-            "email": "vinicius.sabino@dafiti.com.br"
+            "email": "vinicius@vsmoraes.com"
         }
     ],
+    "license": "MIT",
     "require": {
+        "php": "^7",
         "icanboogie/inflector": "^1.4"
     },
     "require-dev": {
