@@ -30,5 +30,16 @@ class MapperTest extends \PHPUnit_Framework_TestCase
             ->getMappedEntity();
 
         $this->assertCount(2, $entities);
+
+        $result1 = $entities[0];
+        $result2 = $entities[1];
+
+        $this->assertEquals(1, $result1->getId());
+        $this->assertEquals('Foo', $result1->getName());
+        $this->assertEquals('male', $result1->gender);
+
+        $this->assertEquals(2, $result2->getId());
+        $this->assertEquals('Bar', $result2->getName());
+        $this->assertEquals('female', $result2->gender);
     }
 }
