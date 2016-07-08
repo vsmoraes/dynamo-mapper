@@ -65,7 +65,7 @@ class Mapper
         $entities = [];
 
         foreach ($this->data as $record) {
-            $entity = clone $this->entityClass;
+            $entity = new $this->entityClass;
 
             foreach ($record as $field => $data) {
                 $type = $annotations->getAttributeType($field);
