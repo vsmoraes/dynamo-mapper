@@ -1,0 +1,26 @@
+{
+    "name": "dafiti/dynamo-mapper",
+    "description": "Map data objects into dynamo queries",
+    "authors": [
+        {
+            "name": "Vinicius Moraes",
+            "email": "vinicius.sabino@dafiti.com.br"
+        }
+    ],
+    "require": {
+        "icanboogie/inflector": "^1.4"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^5.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "Dynamo\\Mapper\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Fixtures\\": "tests/fixtures/"
+        }
+    }
+}
