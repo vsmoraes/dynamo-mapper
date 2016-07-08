@@ -16,7 +16,8 @@ class Mapper
      */
     const MAP = [
         'string' => 'S',
-        'int' => 'N'
+        'int' => 'N',
+        'array' => 'SS'
     ];
 
     /**
