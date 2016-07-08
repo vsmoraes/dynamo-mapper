@@ -8,21 +8,16 @@ class MapperTest extends \PHPUnit_Framework_TestCase
     public function testShouldBuildEntityWithDataArray()
     {
         $data = [
-            'Items' => [
-                [
-                    'id' => ['N' => '1'],
-                    'name' => ['S' => 'Foo'],
-                    'gender' => ['S' => 'male'],
-                ],
-                [
-                    'id' => ['N' => '2'],
-                    'name' => ['S' => 'Bar'],
-                    'gender' => ['S' => 'female'],
-                ],
+            [
+                'id' => ['N' => '1'],
+                'name' => ['S' => 'Foo'],
+                'gender' => ['S' => 'male'],
             ],
-            'Count' => 2,
-            'ScannedCount' => 2,
-            '@metadata' => []
+            [
+                'id' => ['N' => '2'],
+                'name' => ['S' => 'Bar'],
+                'gender' => ['S' => 'female'],
+            ],
         ];
 
         $entities = (new Mapper())->setEntityClass(new Person)
@@ -50,12 +45,10 @@ class MapperTest extends \PHPUnit_Framework_TestCase
         $entity1->gender = 'male';
 
         $expected = [
-            'Items' => [
-                [
-                    'id' => ['N' => 1],
-                    'name' => ['S' => 'Foo'],
-                    'gender' => ['S' => 'male'],
-                ]
+            [
+                'id' => ['N' => 1],
+                'name' => ['S' => 'Foo'],
+                'gender' => ['S' => 'male'],
             ]
         ];
 

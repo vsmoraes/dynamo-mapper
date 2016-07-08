@@ -7,11 +7,6 @@ use ICanBoogie\Inflector;
 class Mapper
 {
     /**
-     * DynamoDb result node
-     */
-    const ITEMS_NODE = 'Items';
-
-    /**
      * Map types
      */
     const MAP = [
@@ -52,11 +47,7 @@ class Mapper
      */
     public function setData(array $data): Mapper
     {
-        if (! array_key_exists(static::ITEMS_NODE, $data)) {
-            throw new \InvalidArgumentException('No entry "Items" found.');
-        }
-
-        $this->data = $data[static::ITEMS_NODE];
+        $this->data = $data;
 
         return $this;
     }
@@ -94,14 +85,12 @@ class Mapper
      */
     public function getData(): array
     {
-        $data = [
-            self::ITEMS_NODE => []
-        ];
+        $data = [];
 
         foreach ($this->entities as $entity) {
             $item = $this->getEntityAttributes($entity);
 
-            $data[self::ITEMS_NODE][] = $item;
+            $data[] = $item;
         }
 
         return $data;
