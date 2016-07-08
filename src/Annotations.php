@@ -1,8 +1,8 @@
 <?php
-namespace Dynamo\Mapper;
+namespace Vsmoraes\DynamoMapper;
 
-use Dynamo\Mapper\Exception\AnnotationNotFound;
-use Dynamo\Mapper\Exception\InvalidAttributeType;
+use Vsmoraes\DynamoMapper\Exception\AnnotationNotFound;
+use Vsmoraes\DynamoMapper\Exception\InvalidAttributeType;
 use ICanBoogie\Inflector;
 
 class Annotations

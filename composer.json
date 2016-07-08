@@ -17,7 +17,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Dynamo\\Mapper\\": "src/"
+            "Vsmoraes\\DynamoMapper\\": "src/"
         }
     },
     "autoload-dev": {
