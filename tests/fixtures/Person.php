@@ -21,32 +21,38 @@ class Person
     /**
      * @return int
      */
-    public function getId()
+    public function getId(): int
     {
         return $this->id;
     }
 
     /**
      * @param int $id
+     * @return Person
      */
-    public function setId($id)
+    public function setId(int $id): Person
     {
         $this->id = $id;
+
+        return $this;
     }
 
     /**
      * @return string
      */
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }
 
     /**
      * @param string $name
+     * @return Person
      */
-    public function setName($name)
+    public function setName(string $name): Person
     {
         $this->name = $name;
+
+        return $this;
     }
 }

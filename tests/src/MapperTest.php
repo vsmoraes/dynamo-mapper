@@ -42,4 +42,26 @@ class MapperTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('Bar', $result2->getName());
         $this->assertEquals('female', $result2->gender);
     }
+
+    public function testShouldBuildArrayDataFromEntities()
+    {
+        $entity1 = (new Person())->setId(1)
+            ->setName('Foo');
+        $entity1->gender = 'male';
+
+        $expected = [
+            'Items' => [
+                [
+                    'id' => ['N' => 1],
+                    'name' => ['S' => 'Foo'],
+                    'gender' => ['S' => 'male'],
+                ]
+            ]
+        ];
+
+        $result = (new Mapper())->setEntities([$entity1])
+            ->getData();
+
+        $this->assertEquals($expected, $result);
+    }
 }
