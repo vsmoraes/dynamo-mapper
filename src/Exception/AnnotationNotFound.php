@@ -1,5 +1,5 @@
 <?php
-namespace Dynamo\Mapper\Exception;
+namespace Vsmoraes\DynamoMapper\Exception;
 
 class AnnotationNotFound extends \Exception
 {

@@ -1,8 +1,9 @@
 <?php
-namespace Dynamo\Mapper;
+namespace Vsmoraes\DynamoMapper;
 
-use Dynamo\Mapper\Exception\AnnotationNotFound;
-use Dynamo\Mapper\Exception\InvalidAttributeType;
+use Vsmoraes\DynamoMapper\Exception\AnnotationNotFound;
+use Vsmoraes\DynamoMapper\Exception\InvalidAttributeType;
+use ICanBoogie\Inflector;
 
 class Annotations
 {
@@ -26,6 +27,7 @@ class Annotations
      */
     public function getAttributeType(string $attribute): string
     {
+        $attribute = Inflector::get()->camelize($attribute, Inflector::DOWNCASE_FIRST_LETTER);
         $docblock = $this->reflectionClass->getProperty($attribute)
             ->getDocComment();
 

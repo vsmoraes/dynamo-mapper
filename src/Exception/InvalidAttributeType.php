@@ -1,5 +1,5 @@
 <?php
-namespace Dynamo\Mapper\Exception;
+namespace Vsmoraes\DynamoMapper\Exception;
 
 class InvalidAttributeType extends \Exception
 {

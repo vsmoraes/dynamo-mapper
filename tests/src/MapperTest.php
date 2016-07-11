@@ -1,5 +1,5 @@
 <?php
-namespace Dynamo\Mapper;
+namespace Vsmoraes\DynamoMapper;
 
 use Fixtures\Person;
 
