@@ -41,7 +41,6 @@ class Annotations
         $type = strtolower($annotations[0][1]);
 
         if (! in_array($type, self::AVAILABLE_TYPES)) {
-            var_dump($type);die;
             throw new InvalidAttributeType;
         }
 
