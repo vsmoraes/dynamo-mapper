@@ -6,7 +6,7 @@ use Dynamo\Mapper\Exception\InvalidAttributeType;
 
 class Annotations
 {
-    const AVAILABLE_TYPES = ['int', 'string', 'array'];
+    const AVAILABLE_TYPES = ['int', 'string', 'array', 'bool', '\datetimeinterface'];
 
     /**
      * @var \ReflectionClass
@@ -30,15 +30,16 @@ class Annotations
             ->getDocComment();
 
         $annotations = [];
-        preg_match_all('/@var\s+(\w+)/', $docblock, $annotations, PREG_SET_ORDER);
+        preg_match_all('/@var\s+(\\\?\w+)/', $docblock, $annotations, PREG_SET_ORDER);
 
         if (empty($annotations) || ! isset($annotations[0][1])) {
             throw new AnnotationNotFound;
         }
 
-        $type = $annotations[0][1];
+        $type = strtolower($annotations[0][1]);
 
         if (! in_array($type, self::AVAILABLE_TYPES)) {
+            var_dump($type);die;
             throw new InvalidAttributeType;
         }
 

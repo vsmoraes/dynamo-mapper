@@ -12,7 +12,9 @@ class Mapper
     const MAP = [
         'string' => 'S',
         'int' => 'N',
-        'array' => 'SS'
+        'array' => 'SS',
+        'bool' => 'BOOL',
+        '\datetimeinterface' => 'S'
     ];
 
     /**
@@ -114,6 +116,10 @@ class Mapper
             $type = $annotations->getAttributeType($property->getName());
             $value = $this->getEntityValue($entity, $property->getName());
 
+            if ($type == '\datetimeinterface') {
+                $value = $value->format(\DateTime::RFC3339);
+            }
+
             $data[$property->getName()] = [
                 self::MAP[$type] => $value
             ];
@@ -145,6 +151,12 @@ class Mapper
 
         if (method_exists($entity, $method)) {
             return $entity->{$method}();
+        }
+
+        $boolMethod = Inflector::get()->camelize('is_' . $field);
+
+        if (method_exists($entity, $boolMethod)) {
+            return $entity->{$boolMethod}();
         }
 
         if (property_exists($entity, $field)) {
