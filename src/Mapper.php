@@ -195,7 +195,7 @@ class Mapper
         if (! array_key_exists($type, static::MAP)) {
             throw new InvalidAttributeType;
         }
-
+        
         return $data[static::MAP[$type]];
     }
 }

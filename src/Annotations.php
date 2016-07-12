@@ -32,7 +32,7 @@ class Annotations
             ->getDocComment();
 
         $annotations = [];
-        preg_match_all('/@var\s+(\\\?\w+)/', $docblock, $annotations, PREG_SET_ORDER);
+        preg_match_all('/@var\s*([^\s]+)/i', $docblock, $annotations, PREG_SET_ORDER);
 
         if (empty($annotations) || ! isset($annotations[0][1])) {
             throw new AnnotationNotFound;
