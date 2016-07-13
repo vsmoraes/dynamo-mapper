@@ -2,6 +2,7 @@
 namespace Vsmoraes\DynamoMapper;
 
 use ICanBoogie\Inflector;
+use Vsmoraes\DynamoMapper\Mappings\Factory;
 
 class DataMap implements Map
 {
@@ -10,9 +11,15 @@ class DataMap implements Map
      */
     private $entity;
 
-    public function __construct($entity)
+    /**
+     * @var Factory
+     */
+    private $mappingFactory;
+
+    public function __construct($entity, Factory $mappingFactory)
     {
         $this->entity = $entity;
+        $this->mappingFactory = $mappingFactory;
     }
 
     /**
@@ -30,13 +37,8 @@ class DataMap implements Map
             $type = $annotations->getAttributeType($property->getName());
             $value = $this->getEntityValue($property->getName());
 
-            if ($type == '\datetimeinterface') {
-                $value = $value->format(\DateTime::RFC3339);
-            }
-
-            $data[$property->getName()] = [
-                Mapper::MAP[$type] => $value
-            ];
+            $data[$property->getName()] = $this->mappingFactory->make($type)
+                ->toArray($value);
         }
 
 

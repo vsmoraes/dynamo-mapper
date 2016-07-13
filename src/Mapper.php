@@ -1,34 +1,27 @@
 <?php
 namespace Vsmoraes\DynamoMapper;
 
-use Vsmoraes\DynamoMapper\Exception\InvalidAttributeType;
-use ICanBoogie\Inflector;
+use Vsmoraes\DynamoMapper\Mappings\Factory;
 
 class Mapper
 {
     /**
-     * Map types
+     * @var Factory
      */
-    const MAP = [
-        'string' => 'S',
-        'int' => 'N',
-        'array' => 'SS',
-        'bool' => 'BOOL',
-        '\datetimeinterface' => 'S'
-    ];
+    private $mappingFactory;
 
-    /**
-     * @var array
-     */
-    protected $entities;
+    public function __construct(Factory $mappingFactory)
+    {
+        $this->mappingFactory = $mappingFactory;
+    }
 
     public function getFilledEntity($entity, array $data)
     {
-        return (new EntityMap($entity, $data))->getMap();
+        return (new EntityMap($entity, $data, $this->mappingFactory))->getMap();
     }
 
     public function getEntityDate($entity)
     {
-        return (new DataMap($entity))->getMap();
+        return (new DataMap($entity, $this->mappingFactory))->getMap();
     }
 }

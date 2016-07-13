@@ -2,6 +2,7 @@
 namespace Vsmoraes\DynamoMapper;
 
 use Fixtures\Person;
+use Vsmoraes\DynamoMapper\Mappings\Factory;
 
 class MapperTest extends \PHPUnit_Framework_TestCase
 {
@@ -13,7 +14,7 @@ class MapperTest extends \PHPUnit_Framework_TestCase
             'gender' => ['S' => 'male'],
         ];
 
-        $entity = (new Mapper())->getFilledEntity(new Person(), $data);
+        $entity = (new Mapper(new Factory()))->getFilledEntity(new Person(), $data);
 
         $this->assertEquals(1, $entity->getId());
         $this->assertEquals('Foo', $entity->getName());
@@ -32,7 +33,7 @@ class MapperTest extends \PHPUnit_Framework_TestCase
             'gender' => ['S' => 'male'],
         ];
 
-        $result = (new Mapper())->getEntityDate($entity1);
+        $result = (new Mapper(new Factory()))->getEntityDate($entity1);
 
         $this->assertEquals($expected, $result);
     }

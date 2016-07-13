@@ -3,6 +3,7 @@ namespace Vsmoraes\DynamoMapper;
 
 use ICanBoogie\Inflector;
 use Vsmoraes\DynamoMapper\Exception\InvalidAttributeType;
+use Vsmoraes\DynamoMapper\Mappings\Factory;
 
 class EntityMap implements Map
 {
@@ -21,10 +22,16 @@ class EntityMap implements Map
      */
     protected $reflectionClass;
 
-    public function __construct($entity, array $data)
+    /**
+     * @var Factory
+     */
+    protected $mappingFactory;
+
+    public function __construct($entity, array $data, $mappingFactory)
     {
         $this->entity = $entity;
         $this->data = $data;
+        $this->mappingFactory = $mappingFactory;
         $this->reflectionClass = new \ReflectionClass($this->entity);
     }
 
@@ -38,7 +45,7 @@ class EntityMap implements Map
             $type = $annotations->getAttributeType($attribute);
             $value = $this->getFieldValue($value, $type);
 
-            $this->setEntityValue($entity, $attribute, $type, $value);
+            $this->setEntityValue($entity, $attribute, $value);
         }
 
         return $entity;
@@ -52,26 +59,18 @@ class EntityMap implements Map
      */
     protected function getFieldValue(array $data, string $type): string
     {
-        if (! array_key_exists($type, Mapper::MAP)) {
-            throw new InvalidAttributeType;
-        }
-
-        return $data[Mapper::MAP[$type]];
+        return $this->mappingFactory->make($type)
+            ->toAttribute($data);
     }
 
     /**
      * @param mixed $entity
      * @param string $field
-     * @param string $type
      * @param mixed $value
      */
-    protected function setEntityValue($entity, string $field, string $type, $value)
+    protected function setEntityValue($entity, string $field, $value)
     {
         $method = Inflector::get()->camelize('set_' . $field);
-
-        if ($type == '\datetimeinterface') {
-            $value = new \DateTime($value);
-        }
 
         if (method_exists($entity, $method)) {
             $entity->{$method}($value);
