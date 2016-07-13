@@ -2,6 +2,7 @@
 namespace Vsmoraes\DynamoMapper;
 
 use ICanBoogie\Inflector;
+use Vsmoraes\DynamoMapper\Exception\AttributeUnreachable;
 use Vsmoraes\DynamoMapper\Exception\InvalidAttributeType;
 use Vsmoraes\DynamoMapper\Mappings\Factory;
 
@@ -67,6 +68,7 @@ class EntityMap implements Map
      * @param mixed $entity
      * @param string $field
      * @param mixed $value
+     * @throws AttributeUnreachable
      */
     protected function setEntityValue($entity, string $field, $value)
     {
@@ -80,6 +82,9 @@ class EntityMap implements Map
         $property = new \ReflectionProperty($entity, $field);
         if ($property->isPublic()) {
             $entity->{$field} = $value;
+            return;
         }
+
+        throw new AttributeUnreachable("Cannot access the attribute: '{$field}'");
     }
 }

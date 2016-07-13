@@ -14,6 +14,11 @@ class Person
     protected $name;
 
     /**
+     * @var bool $active
+     */
+    protected $active = true;
+
+    /**
      * @var string $gender
      */
     public $gender;
@@ -52,6 +57,25 @@ class Person
     public function setName(string $name): Person
     {
         $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isActive(): bool
+    {
+        return $this->active;
+    }
+
+    /**
+     * @param bool $active
+     * @return $this
+     */
+    public function setActive(bool $active)
+    {
+        $this->active = $active;
 
         return $this;
     }

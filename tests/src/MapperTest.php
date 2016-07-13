@@ -12,6 +12,7 @@ class MapperTest extends \PHPUnit_Framework_TestCase
             'id' => ['N' => '1'],
             'name' => ['S' => 'Foo'],
             'gender' => ['S' => 'male'],
+            'active' => ['BOOL' => true]
         ];
 
         $entity = (new Mapper(new Factory()))->getFilledEntity(new Person(), $data);
@@ -31,6 +32,7 @@ class MapperTest extends \PHPUnit_Framework_TestCase
             'id' => ['N' => 1],
             'name' => ['S' => 'Foo'],
             'gender' => ['S' => 'male'],
+            'active' => ['BOOL' => true]
         ];
 
         $result = (new Mapper(new Factory()))->getEntityDate($entity1);

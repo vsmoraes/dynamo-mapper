@@ -2,6 +2,7 @@
 namespace Vsmoraes\DynamoMapper;
 
 use ICanBoogie\Inflector;
+use Vsmoraes\DynamoMapper\Exception\AttributeUnreachable;
 use Vsmoraes\DynamoMapper\Mappings\Factory;
 
 class DataMap implements Map
@@ -48,6 +49,7 @@ class DataMap implements Map
     /**
      * @param string $field
      * @return mixed
+     * @throws AttributeUnreachable
      */
     protected function getEntityValue($field)
     {
@@ -67,5 +69,7 @@ class DataMap implements Map
         if ($property->isPublic()) {
             return $this->entity->{$field};
         }
+        
+        throw new AttributeUnreachable("Cannot access the attribute: '{$field}'");
     }
 }

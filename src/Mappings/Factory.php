@@ -19,7 +19,7 @@ class Factory
             return new $mapClass;
         }
 
-        throw new InvalidAttributeType("The attribute type '{$this}' is not supported");
+        throw new InvalidAttributeType("The attribute type '{$type}' is not supported");
     }
 
     /**
