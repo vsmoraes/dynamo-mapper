@@ -73,7 +73,7 @@ class Mapper
                 $type = $annotations->getAttributeType($field);
                 $value = $this->getFieldValue($data, $type);
 
-                $this->setEntityValue($entity, $field, $value);
+                $this->setEntityValue($entity, $field, $type, $value);
             }
 
             $entities[] = $entity;
@@ -167,11 +167,16 @@ class Mapper
     /**
      * @param mixed $entity
      * @param string $field
+     * @param string $type
      * @param mixed $value
      */
-    protected function setEntityValue($entity, $field, $value)
+    protected function setEntityValue($entity, string $field, string $type, $value)
     {
         $method = Inflector::get()->camelize('set_' . $field);
+
+        if ($type == '\datetimeinterface') {
+            $value = new \DateTime($value);
+        }
 
         if (method_exists($entity, $method)) {
             $entity->{$method}($value);
@@ -195,7 +200,7 @@ class Mapper
         if (! array_key_exists($type, static::MAP)) {
             throw new InvalidAttributeType;
         }
-        
+
         return $data[static::MAP[$type]];
     }
 }
