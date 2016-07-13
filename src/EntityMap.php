@@ -55,10 +55,10 @@ class EntityMap implements Map
     /**
      * @param array $data
      * @param string $type
-     * @return string
+     * @return mixed
      * @throws InvalidAttributeType
      */
-    protected function getFieldValue(array $data, string $type): string
+    protected function getFieldValue(array $data, string $type)
     {
         return $this->mappingFactory->make($type)
             ->toAttribute($data);
