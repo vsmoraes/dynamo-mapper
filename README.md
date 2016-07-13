@@ -3,7 +3,6 @@
 [![Build Status](https://img.shields.io/travis/vsmoraes/dynamo-mapper/master.svg?style=flat-square)](https://travis-ci.org/vsmoraes/dynamo-mapper)
 [![Scrutinizer Code Quality](https://img.shields.io/scrutinizer/g/vsmoraes/dynamo-mapper/master.svg?style=flat-square)](https://scrutinizer-ci.com/g/vsmoraes/dynamo-mapper/?branch=master)
 [![Code Coverage](https://img.shields.io/scrutinizer/coverage/g/vsmoraes/dynamo-mapper/master.svg?style=flat-square)](https://scrutinizer-ci.com/g/vsmoraes/dynamo-mapper/?branch=master)
-[![HHVM](https://img.shields.io/hhvm/vsmoraes/dynamo-mapper.svg?style=flat-square)](https://travis-ci.org/vsmoraes/dynamo-mapper)
 [![Latest Stable Version](https://img.shields.io/packagist/v/vsmoraes/dynamo-mapper.svg?style=flat-square)](https://packagist.org/packages/vsmoraes/dynamo-mapper)
 [![Total Downloads](https://img.shields.io/packagist/dt/vsmoraes/dynamo-mapper.svg?style=flat-square)](https://packagist.org/packages/vsmoraes/dynamo-mapper)
 [![License](https://img.shields.io/packagist/l/vsmoraes/dynamo-mapper.svg?style=flat-square)](https://packagist.org/packages/vsmoraes/dynamo-mapper)
@@ -44,7 +43,7 @@ $entity = (new Person())->setId(1)
     ->setName('Foo');
 $entity->gender = 'male';
 
-$dynamoEntry = (new Mapper(new Factory()))->getEntityDate($entity);
+$dynamoEntry = (new Mapper(new Factory()))->getEntityData($entity);
 ```
 
 ## License

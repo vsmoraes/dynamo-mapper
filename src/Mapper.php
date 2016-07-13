@@ -20,7 +20,7 @@ class Mapper
         return (new EntityMap($entity, $data, $this->mappingFactory))->getMap();
     }
 
-    public function getEntityDate($entity)
+    public function getEntityData($entity)
     {
         return (new DataMap($entity, $this->mappingFactory))->getMap();
     }

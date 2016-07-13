@@ -35,7 +35,7 @@ class MapperTest extends \PHPUnit_Framework_TestCase
             'active' => ['BOOL' => true]
         ];
 
-        $result = (new Mapper(new Factory()))->getEntityDate($entity1);
+        $result = (new Mapper(new Factory()))->getEntityData($entity1);
 
         $this->assertEquals($expected, $result);
     }
