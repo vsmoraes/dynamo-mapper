@@ -20,4 +20,32 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
         $factory = new Factory();
         $factory->make('foo');
     }
+
+    public function testShouldPermitCustomMappings()
+    {
+        $customMapping = new Class implements Mapping {
+            public function toAttribute(array $data)
+            {
+                return 'Bar';
+            }
+
+            public function toArray($value): array
+            {
+                return ['Bar'];
+            }
+        };
+
+        $factory = $this->getMockBuilder(Factory::class)
+            ->setMethods(['getCustomMapping'])
+            ->getMock();
+        
+        $factory->expects($this->once())
+            ->method('getCustomMapping')
+            ->will($this->returnValue($customMapping));
+
+        $result = $factory->make('foo');
+
+        $this->assertInstanceOf(Mapping::class, $result);
+        $this->assertEquals($customMapping, $result);
+    }
 }

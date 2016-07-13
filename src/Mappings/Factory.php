@@ -9,24 +9,29 @@ class Factory
     const DEFAULT_NAMESPACE = '\Vsmoraes\DynamoMapper\Mappings';
 
     /**
-     * @param $type
+     * @param string $type
      * @return Mapping
      * @throws InvalidAttributeType
      */
-    public function make($type): Mapping
+    public function make(string $type): Mapping
     {
         if ($mapClass = $this->isDefaultMapping($type)) {
             return new $mapClass;
+        }
+
+        $customMapping = $this->getCustomMapping($type);
+        if (!is_null($customMapping) && $customMapping instanceof Mapping) {
+            return $customMapping;
         }
 
         throw new InvalidAttributeType("The attribute type '{$type}' is not supported");
     }
 
     /**
-     * @param $type
+     * @param string $type
      * @return string|null
      */
-    protected function isDefaultMapping($type)
+    protected function isDefaultMapping(string $type)
     {
         $className = sprintf(
             '%s\%sMapping',
@@ -35,5 +40,19 @@ class Factory
         );
 
         return class_exists($className) ? $className : null;
+    }
+
+    /**
+     * You can extend this class and override this method
+     * to make your own custom mappings
+     *
+     * @see StringMapping for an example
+     *
+     * @param string $type
+     * @return mixed|null
+     */
+    public function getCustomMapping($type)
+    {
+        return null;
     }
 }
