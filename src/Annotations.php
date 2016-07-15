@@ -7,8 +7,6 @@ use ICanBoogie\Inflector;
 
 class Annotations
 {
-    const AVAILABLE_TYPES = ['int', 'string', 'array', 'bool', '\datetimeinterface'];
-
     /**
      * @var \ReflectionClass
      */
@@ -39,10 +37,6 @@ class Annotations
         }
 
         $type = strtolower($annotations[0][1]);
-
-        if (! in_array($type, self::AVAILABLE_TYPES)) {
-            throw new InvalidAttributeType;
-        }
 
         return $type;
     }
