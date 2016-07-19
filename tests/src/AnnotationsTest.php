@@ -46,19 +46,4 @@ class AnnotationsTest extends \PHPUnit_Framework_TestCase
         $annotations = new Annotations(new \ReflectionClass($fakeClass));
         $annotations->getAttributeType('attribute1');
     }
-
-    public function testShouldThrowInvalidAttributeType()
-    {
-        $this->expectException(InvalidAttributeType::class);
-
-        $fakeClass = new class {
-            /**
-             * @var foo $attribute1
-             */
-            public $attribute1 = 1;
-        };
-
-        $annotations = new Annotations(new \ReflectionClass($fakeClass));
-        $annotations->getAttributeType('attribute1');
-    }
 }
